@@ -328,10 +328,10 @@ func patchKeys(contents []byte, offset int, count int) (uintptr, uintptr) {
 	return AppleSMCHandleOSK, AppleSMCHandleDefault
 }
 
-func DumpSMC(filename string) {
+func DumpSMC(contents []byte) {
 
 	// Read the file
-	contents := loadFile(filename)
+	//contents := loadFile(filename)
 
 	// Find the vSMC headers
 	smcHeaderV0Offset, smcHeaderV1Offset := findHdrs(contents)
@@ -354,10 +354,10 @@ func DumpSMC(filename string) {
 	return
 }
 
-func PatchSMC(filename string) (string, string) {
+func PatchSMC(contents []byte) (string, string) {
 
 	// Read the file
-	contents := loadFile(filename)
+	//contents := LoadFile(filename)
 	unpatched256 := sha256File(contents)
 
 	// Find the vSMC headers
@@ -381,15 +381,15 @@ func PatchSMC(filename string) (string, string) {
 
 	// Flush to disk
 	patched256 := sha256File(contents)
-	saveFile(filename, contents)
+	//SaveFile(filename, contents)
 
 	return unpatched256, patched256
 }
 
-func IsSMCPatched(filename string) (int, string, string) {
+func IsSMCPatched(contents []byte) (int, string, string) {
 
 	// Read the file
-	contents := loadFile(filename)
+	//contents := LoadFile(filename)
 
 	// Internal patch checker
 	patchFlag, patchStatus := checkPatch(contents)

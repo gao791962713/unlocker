@@ -12,7 +12,7 @@ import (
 func PatchVMKCTL(filename string) {
 
 	// Read the file
-	contents := loadFile(filename)
+	contents := LoadFile(filename)
 
 	// Replace applesmc with variable always found on ESXi
 	var APPLESMC = []byte("applesmc")
@@ -27,5 +27,5 @@ func PatchVMKCTL(filename string) {
 	fmt.Printf("Patching %s -> %s\n", before, after)
 
 	// Flush to disk
-	saveFile(filename, contents)
+	SaveFile(filename, contents)
 }

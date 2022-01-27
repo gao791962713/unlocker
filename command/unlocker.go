@@ -74,7 +74,7 @@ func main() {
 
 	if install {
 		fmt.Println()
-		fmt.Println("Installing unlocker.py")
+		fmt.Println("Installing unlocker")
 
 		patchSmc := make(chan *vmwpatch.PatchOperation)
 		patchGos := make(chan *vmwpatch.PatchOperation)
@@ -83,14 +83,15 @@ func main() {
 			for {
 				select {
 				case smc := <-patchSmc:
-					p, _, _ := vmwpatch.IsSMCPatched(smc.FileToPatch)
+					contents := vmwpatch.LoadFile(smc.FileToPatch)
+					p, _, _ := vmwpatch.IsSMCPatched(contents)
 					if p == 0 {
 						fmt.Println("Patching", smc.FileToPatch)
 						backupSuccessful := smc.Backup()
 						if !backupSuccessful {
 							fmt.Println(smc.BackupLocation, "already exists, skipping backup, still patching")
 						}
-						unpatched, patched := vmwpatch.PatchSMC(smc.FileToPatch)
+						unpatched, patched := vmwpatch.PatchSMC(contents)
 						vmwpatch.WriteHashes(smc.BackupLocation, unpatched, patched)
 						fmt.Println()
 					} else {
@@ -134,7 +135,7 @@ func main() {
 		}
 
 	} else {
-		fmt.Println("Uninstalling unlocker.py")
+		fmt.Println("Uninstalling unlocker")
 
 		// Check backup status
 		if !v.BackupExists() {

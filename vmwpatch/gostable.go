@@ -40,7 +40,7 @@ func setBit(n int, pos uint) int {
 func PatchGOS(filename string) (string, string) {
 
 	// Read the file
-	contents := loadFile(filename)
+	contents := LoadFile(filename)
 
 	unpatched := sha256File(contents)
 
@@ -85,7 +85,7 @@ func PatchGOS(filename string) (string, string) {
 
 	// Flush to disk
 	patched := sha256File(contents)
-	saveFile(filename, contents)
+	SaveFile(filename, contents)
 
 	return unpatched, patched
 
@@ -94,7 +94,7 @@ func PatchGOS(filename string) (string, string) {
 func IsGOSPatched(filename string) (int, string) {
 
 	// MMap the file
-	contents := loadFile(filename)
+	contents := LoadFile(filename)
 
 	// Check if the file is already patched
 	indices := findGOSTable(contents)
@@ -137,6 +137,6 @@ func IsGOSPatched(filename string) (int, string) {
 	}
 
 	hash256 := sha256File(contents)
-	saveFile(filename, contents)
+	SaveFile(filename, contents)
 	return patched, hash256
 }

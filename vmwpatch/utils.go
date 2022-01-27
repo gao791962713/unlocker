@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func loadFile(filename string) (contents []byte) {
+func LoadFile(filename string) (contents []byte) {
 
 	// Print filename
 	fmt.Printf("File: %s\n", filename)
@@ -25,7 +25,7 @@ func loadFile(filename string) (contents []byte) {
 	return contents
 }
 
-func saveFile(filename string, contents []byte) {
+func SaveFile(filename string, contents []byte) {
 	err := os.WriteFile(filename, contents, 0444)
 	if err != nil {
 		panic(err)
