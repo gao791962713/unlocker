@@ -16,7 +16,7 @@ Thanks to boostchicken for the fixes and improvements to the code.
 
 _boostchicken:_
 * Refactor to be more go like
-* Fix vmware-shell-ext-thunker.exe preventing patching on windows
+* Fix vmware-shell-ext-thunker.exe preventing patching on Windows
 * Fixed header offset bug and binpack allocs
 * Cleaned up logic regarding restoring backups or not
 * Elevate permissions on Windows automatically
