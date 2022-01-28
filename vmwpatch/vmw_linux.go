@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: © 2014-2022 David Parsons
 // SPDX-License-Identifier: MIT
 
-//go:build linux
-// +build linux
+//go:build linux && !esx
+// +build linux,!esx
 
 package vmwpatch
 

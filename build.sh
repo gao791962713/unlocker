@@ -8,3 +8,6 @@ env GOOS=windows GOARCH=amd64 go build -o ./windows/unlocker.exe ./command/unloc
 echo Building Linux executables...
 env GOOS=linux GOARCH=amd64 go build -o ./linux/dumpsmc ./tools/dumpsmc.go
 env GOOS=linux GOARCH=amd64 go build -o ./linux/unlocker ./command/unlocker.go
+
+echo Building ESX executables...
+env GOOS=linux GOARCH=amd64 go build -tags esx -o ./esx/dumpsmc ./tools/dumpsmc.go
